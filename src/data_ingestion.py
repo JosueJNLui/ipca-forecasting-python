@@ -5,7 +5,7 @@ class BCB:
 
     def __init__(self):
 
-        self.url_std = "https://api.bcb.gov.br/dados/serie/bcdata.sgs.{}/dados?formato={}&dataInicial={}&{}"
+        self.url_std = "https://api.bcb.gov.br/dados/serie/bcdata.sgs.{}/dados?formato={}&dataInicial={}&dataFinal={}"
     
     def get_data(self, code: str, format: str, start_date: str, end_date: str) -> json:
         """
@@ -28,7 +28,3 @@ class BCB:
             return response.json()
         except requests.exceptions.RequestException as e:
             raise Exception(f"Failed to fetch the data: {e}")
-
-bcb = BCB()
-data = bcb.get_data('10844', 'json', '01/01/2020', '31/12/2016')
-print(data)
