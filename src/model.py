@@ -3,7 +3,7 @@ from sklearn.linear_model import LinearRegression
 import numpy as np
 import matplotlib.pyplot as plt
 
-from data_processing import read_data, pre_process_data, get_date_cols
+from data_processing import read_data, pre_process_data, date_features
 
 class Model:
 
@@ -18,7 +18,7 @@ class Model:
 
 df = read_data('/home/josue-lui/dev/ipca-forecasting-python/data/historical_data.json')
 df = pre_process_data(df, 'data', 'valor')
-df = get_date_cols(df, 'data')
+df = date_features(df, 'data')
 
 test_size = int(0.30 * len(df))
 
