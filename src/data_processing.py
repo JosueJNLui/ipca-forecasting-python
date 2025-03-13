@@ -16,11 +16,12 @@ def pre_process_data(df: pl.DataFrame, date_col: str, value_col: str) -> pl.Data
 
     return df
 
-def get_date_cols(df: pl.DataFrame, date_col: str) -> pl.DataFrame:
+def date_features(df: pl.DataFrame, date_col: str) -> pl.DataFrame:
 
     df = df.with_columns(
-        year = pl.col(date_col).dt.year(),
-        month = pl.col(date_col).dt.month()
+        year    = pl.col(date_col).dt.year(),
+        month   = pl.col(date_col).dt.month(),
+        quarter = pl.col(date_col).dt.quarter()
     )
 
     return df.select(pl.exclude(date_col))

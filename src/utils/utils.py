@@ -23,4 +23,14 @@ class Utils:
         path = os.path.join(folder_path, f"{filename}.json")
 
         with open(path, '+w') as f:
-            json.dump(json_obj, f)
+            json.dump(json_obj, f, indent=4)
+
+    @staticmethod
+    def read_json(json_path: str) -> json:
+
+        if not os.path.exists(json_path):
+            with open(json_path, 'w') as arquivo:
+                arquivo.write('[]')
+
+        with open(json_path, 'r') as arquivo:
+            return json.load(arquivo)
