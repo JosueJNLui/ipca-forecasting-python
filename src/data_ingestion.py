@@ -1,9 +1,10 @@
 import requests
 import json
+from utils.utils import Utils
 
 class BCB:
 
-    def __init__(self):
+    def __init__(self) -> None:
 
         self.url_std = "https://api.bcb.gov.br/dados/serie/bcdata.sgs.{}/dados?formato={}&dataInicial={}&dataFinal={}"
     
@@ -28,3 +29,23 @@ class BCB:
             return response.json()
         except requests.exceptions.RequestException as e:
             raise Exception(f"Failed to fetch the data: {e}")
+
+if __name__ == '__main__':
+
+    start_date = '01/01/1999'
+    end_date = '01/01/2025'
+
+    bcb = BCB()
+
+    codes = {
+        'ipca_monthly': 10844,
+        'selic_daily': 4390,
+        'cambio': 10813,
+        'm2': 1787
+    }
+
+    for name, code in codes.items():
+
+        data = bcb.get_data(code, 'json', start_date, end_date)
+        
+        Utils.save_json(data, '../data', name)
