@@ -1,15 +1,6 @@
 import requests
 import json
 from utils.utils import Utils
-# from unicodedata import normalize
-# import re
-
-# def process_text(raw_text: str):
-    
-#     text = normalize('NFKD', raw_text).encode('ASCII', 'ignore').decode('ASCII')
-#     text = ' '.join(text.strip().split())
-
-#     return re.sub('[^A-Za-z0-9 ]+', '', text)
 
 class API:
 
@@ -28,7 +19,22 @@ class API:
 
         url = self.url_sidra.format(query_parameters)
 
-        return self.get_request(url)
+        raw_data = self.get_request(url)
+        
+        header = {k: Utils.process_text(v) for k, v in raw_data[0].items()}
+        data = []
+
+        for row in raw_data[1:]:
+
+            raw_values = {}
+
+            for k, v in row.items():
+                raw_values[header.get(k)] = v
+            
+            data.append(raw_values)
+        
+        return data
+
 
     def get_request(self, url: str) -> json:
         """
@@ -59,35 +65,28 @@ if __name__ == '__main__':
 
     api = API()
 
-    bcb_codes = {
-        'ipca': 10844,
-        'selic': 4390,
-        'cambio': 10813,
-        'm2': 1787,
-        'icc': 4393
+    data_sources = {
+
+        'bcb': {
+            'ipca': 10844,
+            'selic': 4390,
+            'cambio': 10813,
+            'm2': 1787,
+            'icc': 4393
+        },
+        'sidra': {
+            'desocupacao': "t/4093/n1/all/v/4099/p/all/c2/6794"
+        }
     }
 
-    sidra_query_parameters = {
-        'desocupacao': "t/4093/n1/all/v/4099/p/all/c2/6794"
-    }
+    for source, values in data_sources.items():
 
-
-    # for name, code in bcb_codes.items():
-
-    #     data = api.get_bcb_data(code, 'json', start_date, end_date)
-        
-    #     Utils.save_json(data, '../data', name)
-
-    for name, param in sidra_query_parameters.items():
-
-        data = api.get_sidra_data(param)
-
-        # processed_data = [
-        #     {k: process_text(v) if isinstance(v, str) else v 
-        #      for k, v in d.items()}
-        #      for d in data
-        # ]
-
-
-        
-    Utils.save_json(data, '../data', name)
+        for name, param in values.items():
+            
+            if source == 'bcb':
+                data = api.get_bcb_data(param, 'json', start_date, end_date)
+            
+            if source == 'sidra':
+                data = api.get_sidra_data(param)
+            
+            Utils.save_json(data, '../data', name)
