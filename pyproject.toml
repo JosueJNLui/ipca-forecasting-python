@@ -1,0 +1,23 @@
+[project]
+name = "ipca-forecasting-python"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "JosueJNLui",email = "nlui.josuej@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "duckdb (>=1.2.1,<2.0.0)",
+    "boto3 (>=1.37.18,<2.0.0)",
+    "requests (>=2.32.3,<3.0.0)",
+    "numpy (>=2.2.4,<3.0.0)",
+    "openpyxl (>=3.1.5,<4.0.0)",
+    "setuptools (>=77.0.3,<78.0.0)",
+    "botocore (>=1.37.18,<2.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
