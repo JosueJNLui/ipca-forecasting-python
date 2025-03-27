@@ -6,7 +6,7 @@ authors = [
     {name = "JosueJNLui",email = "nlui.josuej@gmail.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.12,<4.0"
 dependencies = [
     "duckdb (>=1.2.1,<2.0.0)",
     "boto3 (>=1.37.18,<2.0.0)",
@@ -14,7 +14,11 @@ dependencies = [
     "numpy (>=2.2.4,<3.0.0)",
     "openpyxl (>=3.1.5,<4.0.0)",
     "setuptools (>=77.0.3,<78.0.0)",
-    "botocore (>=1.37.18,<2.0.0)"
+    "botocore (>=1.37.18,<2.0.0)",
+    "loguru (>=0.7.3,<0.8.0)",
+    "pydantic (>=2.10.6,<3.0.0)",
+    "ruff (>=0.11.2,<0.12.0)",
+    "fire (>=0.7.0,<0.8.0)"
 ]
 
 
