@@ -6,5 +6,6 @@ locals {
   projects_component = var.projects_component
 
 
-  buckets = ["assets", "landing", "bronze", "silver", "gold"]
+  buckets      = ["assets", "landing", "bronze", "silver", "gold"]
+  data_sources = ["bcb", "sidra"]
 }

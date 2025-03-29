@@ -1,0 +1,42 @@
+[
+    {
+        "series_name": "Índice nacional de preços ao consumidor-amplo (IPCA)",
+        "format": "json",
+        "code": 433,
+        "start_date": "01/01/1999",
+        "end_date": "01/01/2025",
+        "table_name": "ipca"
+    },
+    {
+        "series_name": "Taxa de juros - Selic acumulada no mês",
+        "format": "json",
+        "code": 4390,
+        "start_date": "01/01/1999",
+        "end_date": "01/01/2025",
+        "table_name": "selic"
+    },
+    {
+        "series_name": "Taxa de câmbio - Livre - Dólar americano (compra)",
+        "format": "json",
+        "code": 10813,
+        "start_date": "01/01/1999",
+        "end_date": "01/01/2025",
+        "table_name": "cambio"
+    },
+    {
+        "series_name": "Agregado Monetário M2",
+        "format": "json",
+        "code": 1787,
+        "start_date": "01/01/1999",
+        "end_date": "01/01/2025",
+        "table_name": "m2"
+    },
+    {
+        "series_name": "Índice de Confiança do Consumidor",
+        "format": "json",
+        "code": 4393,
+        "start_date": "01/01/1999",
+        "end_date": "01/01/2025",
+        "table_name": "icc"
+    }
+]
