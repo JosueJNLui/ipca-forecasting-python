@@ -1,0 +1,5 @@
+env                = "dev"
+aws_region         = "us-east-2"
+aws_profile        = "dev"
+project            = "ipca-forecasting"
+projects_component = "datalake"
