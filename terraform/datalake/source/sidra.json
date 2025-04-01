@@ -1,6 +1,7 @@
 [
     {
         "series_name": " Taxa de desocupação",
-        "code": "t/4093/n1/all/v/4099/p/all/c2/6794"
+        "code": "t/4093/n1/all/v/4099/p/all/c2/6794",
+        "table_name": "desocupacao"
     }
 ]
