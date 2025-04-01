@@ -1,8 +1,8 @@
 from ingestion.models import (
     BCBJobParameters,
     SidraJobParameters,
-    BCBResponseData,
-    SidraRes,
+    # BCBResponseData,
+    # SidraRes,
 )
 from ingestion.api import API
 

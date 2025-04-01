@@ -8,14 +8,14 @@ class BCBJobParameters(BaseModel):
     format: str = "json"
     code: int
     table_name: str
-    destination: Annotated[Union[List[str], str], Field(default=["local"])]
-    s3_path: Optional[str]
-    aws_profile: Optional[str]
+    # destination: Annotated[Union[List[str], str], Field(default=["local"])]
+    # s3_path: Optional[str]
+    # aws_profile: Optional[str]
 
 
 class SidraJobParameters(BaseModel):
     code: str
     table_name: str
-    destination: Annotated[Union[List[str], str], Field(default=["local"])]
-    s3_path: Optional[str]
-    aws_profile: Optional[str]
+    # destination: Annotated[Union[List[str], str], Field(default=["local"])]
+    # s3_path: Optional[str]
+    # aws_profile: Optional[str]
