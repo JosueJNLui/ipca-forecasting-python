@@ -9,13 +9,15 @@ from ingestion.aws import list_bucket_objects
 # import os
 import fire
 import boto3
+import pyarrow as pa
 
 
-AWS_PROFIILE = "profile"
-AWS_ACCOUNT_ID = "11111111111111"
-AWS_REGION = "us-east-2"
-ENV = "dev"
+AWS_PROFIILE = "........"
+AWS_ACCOUNT_ID = ".............."
+AWS_REGION = "......"
+ENV = "........"
 S3_ASSETS_BUCKET = f"personal-projects-assets-{ENV}-{AWS_REGION}-{AWS_ACCOUNT_ID}"
+S3_LANDING_BUCKET = f"personal-projects-landing-{ENV}-{AWS_REGION}-{AWS_ACCOUNT_ID}"
 
 
 def main() -> None:
@@ -25,41 +27,52 @@ def main() -> None:
     api = API()
     db = DB(AWS_PROFIILE, AWS_REGION)
 
-    objects = list_bucket_objects(AWS_PROFIILE, AWS_REGION, S3_ASSETS_BUCKET, 'data_sources')
+    DATA_SOURCES = {
+        "bcb": {
+            "param_class": BCBJobParameters,
+            "api_method": api.get_bcb_data,
+            "required_fields": ["start_date", "end_date", "format", "code", "table_name"]
+        },
+        "sidra": {
+            "param_class": SidraJobParameters,
+            "api_method": api.get_sidra_data,
+            "required_fields": ["code", "table_name"]
+        }
+    }
+
+    bucket_objects = list_bucket_objects(AWS_PROFIILE, AWS_REGION, S3_ASSETS_BUCKET, 'data_sources')
 
     # Iterando sobre os JSONs contendo as informações da fonte de dados
-    for obj in objects:
-        columns, results = db.query_from_s3(
-            f"s3://{S3_ASSETS_BUCKET}/{obj}"
-        )
+    for object_path in bucket_objects:
+
+        file_key = object_path.split("/")[1]
+        object = file_key.split(".")[0]
+
+        if object not in DATA_SOURCES:
+            continue
+
+        columns, results = db.query_from_s3(f"{S3_ASSETS_BUCKET}/{object_path}")
+        column_index = {col: idx for idx, col in enumerate(columns)}
+        config = DATA_SOURCES[object]
 
         for row in results:
 
-            if obj.split("/")[1].split(".")[0] == "bcb":
-                params = BCBJobParameters(
-                    start_date=row[columns.index("start_date")],
-                    end_date=row[columns.index("end_date")],
-                    format=row[columns.index("format")],
-                    code=row[columns.index("code")],
-                    table_name=row[columns.index("table_name")],
-                )
+            param_args = {
+                field: row[column_index[field]] for field in config["required_fields"]
+            }
 
-                try: 
-                    data = api.get_bcb_data(params)
-                except:
-                    continue
-            
-            if obj.split("/")[1].split(".")[0] == "sidra":
-                params = SidraJobParameters(
-                    code=row[columns.index("code")],
-                    table_name=row[columns.index("table_name")],
-                )
+            try:
 
-                try: 
-                    data = api.get_sidra_data(params)
-                    print(data)
-                except:
-                    continue
+                params = config["param_class"](**param_args)
+                data = config["api_method"](params)
+                table_name = param_args["table_name"]
+
+                arrow_table = pa.Table.from_pylist(data)
+
+                db.write_to_s3(data, S3_LANDING_BUCKET, f'ipca-project/{table_name}', 'PARQUET', 'data')
+
+            except Exception as e:
+                continue
         
     end_time = datetime.now()
     elapsed = (end_time - start_time).total_seconds()
