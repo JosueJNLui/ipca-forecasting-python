@@ -6,16 +6,16 @@ sources:
     
       - name: tbl_ipca
         meta:
-          external_location: "{{ env_var('S3_LANDING_BUCKET') ~ '/' ~  env_var('bucket-path') ~ '/' ~ 'ipca.json' }}"
+          external_location: "{{ 's3://personal-projects-landing' ~ '-' ~  env_var('ENV') ~ '-' ~ env_var('AWS_REGION') ~ '-' ~ env_var('AWS_ACCOUNT_ID') ~ '/' ~ env_var('BUCKET_PATH') ~ '/' ~ 'ipca.json' }}"
 
       - name: tbl_selic
         meta:
-          external_location: "{{ env_var('S3_LANDING_BUCKET') ~ '/' ~  env_var('bucket-path') ~ '/' ~ 'selic.json' }}"
+          external_location: "{{ 's3://personal-projects-landing' ~ '-' ~  env_var('ENV') ~ '-' ~ env_var('AWS_REGION') ~ '-' ~ env_var('AWS_ACCOUNT_ID') ~ '/' ~ env_var('BUCKET_PATH') ~ '/' ~ 'selic.json' }}"
       
       - name: tbl_m2
         meta:
-          external_location: "{{ env_var('S3_LANDING_BUCKET') ~ '/' ~  env_var('bucket-path') ~ '/' ~ 'm2.json' }}"
+          external_location: "{{ 's3://personal-projects-landing' ~ '-' ~  env_var('ENV') ~ '-' ~ env_var('AWS_REGION') ~ '-' ~ env_var('AWS_ACCOUNT_ID') ~ '/' ~ env_var('BUCKET_PATH') ~ '/' ~ 'm2.json' }}"
       
       - name: tbl_icc
         meta:
-          external_location: "{{ env_var('S3_LANDING_BUCKET') ~ '/' ~  env_var('bucket-path') ~ '/' ~ 'icc.json' }}"
+          external_location: "{{ 's3://personal-projects-landing' ~ '-' ~  env_var('ENV') ~ '-' ~ env_var('AWS_REGION') ~ '-' ~ env_var('AWS_ACCOUNT_ID') ~ '/' ~ env_var('BUCKET_PATH') ~ '/' ~ 'icc.json' }}"

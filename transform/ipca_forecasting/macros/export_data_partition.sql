@@ -1,5 +1,5 @@
 {% macro export_data_partition(partition_col, table) %}
-{% set s3_path = env_var('S3_BRONZE_BUCKET') ~ '/' ~ env_var('bucket-path') %}
+{% set s3_path = 's3://personal-projects-bronze' ~ '-' ~  env_var('ENV') ~ '-' ~ env_var('AWS_REGION') ~ '-' ~ env_var('AWS_ACCOUNT_ID') ~ '/' ~ env_var('BUCKET_PATH') %}
     COPY (
         SELECT 
             *
