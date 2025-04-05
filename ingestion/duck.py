@@ -26,24 +26,39 @@ class DB:
 
         return columns, results
 
-    def write_to_s3(self, data: list[dict], s3_bucket: str, table_path: str, format_object: str, partition: str = None):
+    # def write_to_s3(self, data: list[dict], s3_bucket: str, table_path: str, format_object: str, partition: str = None):
+    #     self.load_aws_credentials()
+
+    #     arrow_table = pa.Table.from_pylist(data)
+
+    #     copy_command = f"""
+    #         COPY (
+    #             WITH cte_data as (
+    #             SELECT
+    #                 *
+    #                 {f", year(strptime({partition}, '%d/%m/%Y')) year_partition" if partition not in arrow_table.column_names else ""}
+    #             FROM
+    #                 arrow_table
+    #             )
+    #             SELECT * FROM cte_data
+    #         )
+    #         TO 's3://{s3_bucket}/{table_path}'
+    #         (FORMAT PARQUET, PARTITION_BY ({'year_partition' if partition not in arrow_table.column_names else partition}), OVERWRITE_OR_IGNORE 1, COMPRESSION 'ZSTD');
+    #     """
+
+    #     self.conn.sql(copy_command)
+
+    def write_json_to_s3(self, data: list[dict], s3_bucket: str, table_path: str):
         self.load_aws_credentials()
 
         arrow_table = pa.Table.from_pylist(data)
 
         copy_command = f"""
             COPY (
-                WITH cte_data as (
-                SELECT
-                    *
-                    , year(strptime({partition}, '%d/%m/%Y')) year_partition
-                FROM
-                    arrow_table
-                )
-                SELECT * FROM cte_data
+                SELECT * FROM arrow_table
             )
-            TO 's3://{s3_bucket}/{table_path}'
-            (FORMAT PARQUET, PARTITION_BY (year_partition), OVERWRITE_OR_IGNORE 1, COMPRESSION 'ZSTD');
+            TO 's3://{s3_bucket}/{table_path}.json'
+            (FORMAT JSON);
         """
 
         self.conn.sql(copy_command)

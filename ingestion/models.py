@@ -1,6 +1,12 @@
 from pydantic import BaseModel, Field
 from typing import List, Optional, Union, Annotated
 
+class IngestionJobParameters(BaseModel):
+    aws_profile: str
+    aws_account_id: str
+    aws_region: str
+    env: str
+    
 
 class BCBJobParameters(BaseModel):
     start_date: str = "01/01/1999"

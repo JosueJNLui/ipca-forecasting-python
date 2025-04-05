@@ -1,0 +1,21 @@
+version: 2
+
+sources:
+  - name: external_source
+    tables:
+    
+      - name: tbl_ipca
+        meta:
+          external_location: "{{ env_var('S3_LANDING_BUCKET') ~ '/' ~  env_var('bucket-path') ~ '/' ~ 'ipca.json' }}"
+
+      - name: tbl_selic
+        meta:
+          external_location: "{{ env_var('S3_LANDING_BUCKET') ~ '/' ~  env_var('bucket-path') ~ '/' ~ 'selic.json' }}"
+      
+      - name: tbl_m2
+        meta:
+          external_location: "{{ env_var('S3_LANDING_BUCKET') ~ '/' ~  env_var('bucket-path') ~ '/' ~ 'm2.json' }}"
+      
+      - name: tbl_icc
+        meta:
+          external_location: "{{ env_var('S3_LANDING_BUCKET') ~ '/' ~  env_var('bucket-path') ~ '/' ~ 'icc.json' }}"
