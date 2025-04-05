@@ -1,27 +1,23 @@
 from ingestion.api import API
-from ingestion.utils import Utils
+# from ingestion.utils import Utils
 from loguru import logger
 from datetime import datetime
-from ingestion.models import BCBJobParameters, SidraJobParameters
+from ingestion.models import BCBJobParameters, SidraJobParameters, IngestionJobParameters
 from ingestion.duck import DB
 from ingestion.aws import list_bucket_objects
-
-# import os
-import fire
-import boto3
 import pyarrow as pa
+import fire
 
-
-AWS_PROFIILE = "........"
-AWS_ACCOUNT_ID = ".............."
-AWS_REGION = "......"
-ENV = "........"
-S3_ASSETS_BUCKET = f"personal-projects-assets-{ENV}-{AWS_REGION}-{AWS_ACCOUNT_ID}"
-S3_LANDING_BUCKET = f"personal-projects-landing-{ENV}-{AWS_REGION}-{AWS_ACCOUNT_ID}"
-
-
-def main() -> None:
+def main(params: IngestionJobParameters) -> None:
     start_time = datetime.now()
+
+    ENV = params.env
+    AWS_REGION = params.aws_region
+    AWS_ACCOUNT_ID = params.aws_account_id
+    AWS_PROFIILE = params.aws_profile
+
+    S3_ASSETS_BUCKET = f"personal-projects-assets-{ENV}-{AWS_REGION}-{AWS_ACCOUNT_ID}"
+    S3_LANDING_BUCKET = f"personal-projects-landing-{ENV}-{AWS_REGION}-{AWS_ACCOUNT_ID}"
 
     # Instanciando as classes desenvolvidas
     api = API()
@@ -69,7 +65,7 @@ def main() -> None:
 
                 arrow_table = pa.Table.from_pylist(data)
 
-                db.write_to_s3(data, S3_LANDING_BUCKET, f'ipca-project/{table_name}', 'PARQUET', 'data')
+                db.write_json_to_s3(data, S3_LANDING_BUCKET, f'ipca-project/{table_name}')
 
             except Exception as e:
                 continue
@@ -81,4 +77,5 @@ def main() -> None:
     )
 
 if __name__ == "__main__":
-    main()
+    # print(**kwargs)
+    fire.Fire(lambda **kwargs: main(IngestionJobParameters(**kwargs)))

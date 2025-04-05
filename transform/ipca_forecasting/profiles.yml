@@ -1,0 +1,14 @@
+ipca_forecasting:
+  outputs:
+    dev:
+      type: duckdb
+      path: dev.duckdb
+      extensions:
+        - httpfs
+        - parquet
+      secrets:
+        - type: s3
+          provider: credential_chain
+      threads: 1
+
+  target: dev
