@@ -77,5 +77,4 @@ def main(params: IngestionJobParameters) -> None:
     )
 
 if __name__ == "__main__":
-    # print(**kwargs)
     fire.Fire(lambda **kwargs: main(IngestionJobParameters(**kwargs)))
