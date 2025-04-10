@@ -1,6 +1,6 @@
 [
     {
-        "series_name": "Índice nacional de preços ao consumidor-amplo (IPCA)",
+        "series_name": "Séries Números Índice nacional de preços ao consumidor-amplo (IPCA) ",
         "format": "json",
         "code": 433,
         "start_date": "02/01/1980",
@@ -8,20 +8,268 @@
         "table_name": "ipca"
     },
     {
+        "series_name": "IPCA - Alimentação e bebidas ",
+        "format": "json",
+        "code": 1635,
+        "start_date": "31/01/1991",
+        "end_date": "01/01/2025",
+        "table_name": "alimentacao_e_bebidas"
+    },
+    {
+        "series_name": "IPCA - Habitação  ",
+        "format": "json",
+        "code": 1636,
+        "start_date": "31/01/1991",
+        "end_date": "01/01/2025",
+        "table_name": "habitacao"
+    },
+    {
+        "series_name": "IPCA - Artigos de residência ",
+        "format": "json",
+        "code": 1637,
+        "start_date": "31/01/1991",
+        "end_date": "01/01/2025",
+        "table_name": "artigos_de_residencia"
+    },
+    {
+        "series_name": "IPCA - Vestuário ",
+        "format": "json",
+        "code": 1638,
+        "start_date": "31/01/1991",
+        "end_date": "01/01/2025",
+        "table_name": "vestuario"
+    },
+    {
+        "series_name": "IPCA - Transportes ",
+        "format": "json",
+        "code": 1639,
+        "start_date": "31/08/1999",
+        "end_date": "01/01/2025",
+        "table_name": "transporte"
+    },
+    {
+        "series_name": "IPCA - Comunicação ",
+        "format": "json",
+        "code": 1640,
+        "start_date": "31/08/1999",
+        "end_date": "01/01/2025",
+        "table_name": "comunicacao"
+    },
+    {
+        "series_name": "IPCA - Saúde e cuidados pessoais ",
+        "format": "json",
+        "code": 1641,
+        "start_date": "31/01/1991",
+        "end_date": "01/01/2025",
+        "table_name": "saude_e_cuidados_pessoais"
+    },
+    {
+        "series_name": "IPCA - Despesas pessoais ",
+        "format": "json",
+        "code": 1642,
+        "start_date": "31/01/1991",
+        "end_date": "01/01/2025",
+        "table_name": "despesas_pessoais"
+    },
+    {
+        "series_name": "IPCA - Educação ",
+        "format": "json",
+        "code": 1643,
+        "start_date": "31/08/1999",
+        "end_date": "01/01/2025",
+        "table_name": "educacao"
+    },
+    {
+        "series_name": "IPCA - Comercializáveis ",
+        "format": "json",
+        "code": 4447,
+        "start_date": "01/01/1992",
+        "end_date": "01/01/2025",
+        "table_name": "comercializaveis"
+    },
+    {
+        "series_name": "IPCA - Não comercializáveis ",
+        "format": "json",
+        "code": 4448,
+        "start_date": "01/01/1992",
+        "end_date": "01/01/2025",
+        "table_name": "nao_comercializaveis"
+    },
+    {
+        "series_name": "IPCA - Preços monitorados - Total ",
+        "format": "json",
+        "code": 4449,
+        "start_date": "01/01/1992",
+        "end_date": "01/01/2025",
+        "table_name": "precos_monitorados_total"
+    },
+    {
+        "series_name": "IPCA - Preços monitorados - IPTU ",
+        "format": "json",
+        "code": 4450,
+        "start_date": "01/01/1992",
+        "end_date": "01/01/2025",
+        "table_name": "precos_monitorados_iptu"
+    },
+    {
+        "series_name": "IPCA - Preços monitorados - Taxa de água e esgoto ",
+        "format": "json",
+        "code": 4451,
+        "start_date": "01/01/1992",
+        "end_date": "01/01/2025",
+        "table_name": "precos_monitorados_taxa_de_agua_e_esgoto"
+    },
+    {
+        "series_name": "IPCA - Preços monitorados - Gás de bujão ",
+        "format": "json",
+        "code": 4452,
+        "start_date": "01/01/1992",
+        "end_date": "01/01/2025",
+        "table_name": "precos_monitorados_gas_de_bujao"
+    },
+    {
+        "series_name": "IPCA - Preços monitorados - Energia elétrica ",
+        "format": "json",
+        "code": 4453,
+        "start_date": "01/01/1992",
+        "end_date": "01/01/2025",
+        "table_name": "precos_monitorados_energia_eletrica"
+    },
+    {
+        "series_name": "IPCA - Preços monitorados - Ônibus urbano ",
+        "format": "json",
+        "code": 4454,
+        "start_date": "01/01/1992",
+        "end_date": "01/01/2025",
+        "table_name": "precos_monitorados_onibus_urbano"
+    },
+    {
+        "series_name": "IPCA - Preços monitorados - Ônibus intermunicipal ",
+        "format": "json",
+        "code": 4455,
+        "start_date": "01/01/1992",
+        "end_date": "01/01/2025",
+        "table_name": "precos_monitorados_onibus_intermunicipal"
+    },
+    {
+        "series_name": "IPCA - Preços monitorados - Avião ",
+        "format": "json",
+        "code": 4456,
+        "start_date": "01/01/1992",
+        "end_date": "01/01/2025",
+        "table_name": "precos_monitorados_aviao"
+    },
+    {
+        "series_name": "IPCA - Preços monitorados - Metrô ",
+        "format": "json",
+        "code": 4457,
+        "start_date": "01/01/1992",
+        "end_date": "01/01/2025",
+        "table_name": "precos_monitorados_metro"
+    },
+    {
+        "series_name": "IPCA - Preços monitorados - Gasolina ",
+        "format": "json",
+        "code": 4458,
+        "start_date": "01/01/1992",
+        "end_date": "01/01/2025",
+        "table_name": "precos_monitorados_gasolina"
+    },
+    {
+        "series_name": "IPCA - Preços monitorados - Álcool ",
+        "format": "json",
+        "code": 4459,
+        "start_date": "01/01/1992",
+        "end_date": "01/01/2025",
+        "table_name": "precos_monitorados_alcool"
+    },
+    {
+        "series_name": "IPCA - Preços monitorados - Óleo diesel ",
+        "format": "json",
+        "code": 4460,
+        "start_date": "31/08/1999",
+        "end_date": "01/01/2025",
+        "table_name": "precos_monitorados_oleo_diesel"
+    },
+    {
+        "series_name": "IPCA - Preços monitorados - Plano de saúde ",
+        "format": "json",
+        "code": 4461,
+        "start_date": "01/01/1992",
+        "end_date": "01/01/2025",
+        "table_name": "precos_monitorados_plano_de_saude"
+    },
+    {
+        "series_name": "IPCA - Preços monitorados - Telefone fixo ",
+        "format": "json",
+        "code": 4463,
+        "start_date": "01/01/1992",
+        "end_date": "01/01/2025",
+        "table_name": "precos_monitorados_telefone_fixo"
+    },
+    {
+        "series_name": "IPCA - Preços monitorados - Telefone celular ",
+        "format": "json",
+        "code": 4464,
+        "start_date": "31/08/1999",
+        "end_date": "01/01/2025",
+        "table_name": "precos_monitorados_telefone_celular"
+    },
+    {
+        "series_name": "IPCA - Preços monitorados - Outros ",
+        "format": "json",
+        "code": 4465,
+        "start_date": "01/01/1992",
+        "end_date": "01/01/2025",
+        "table_name": "precos_monitorados_outros"
+    },
+    {
+        "series_name": "IPCA - Núcleo ",
+        "format": "json",
+        "code": 4466,
+        "start_date": "31/01/1996",
+        "end_date": "01/01/2025",
+        "table_name": "nucleo"
+    },
+    {
+        "series_name": "Índice de Preços ao Consumidor-Amplo (IPCA) - Bens não-duráveis ",
+        "format": "json",
+        "code": 10841,
+        "start_date": "31/01/1992",
+        "end_date": "01/01/2025",
+        "table_name": "bens_nao_duraveis"
+    },
+    {
+        "series_name": "Índice de Preços ao Consumidor-Amplo (IPCA) - Bens semi-duráveis ",
+        "format": "json",
+        "code": 10842,
+        "start_date": "31/01/1992",
+        "end_date": "01/01/2025",
+        "table_name": "bens_semi_duraveis"
+    },
+    {
+        "series_name": "Índice de Preços ao Consumidor-Amplo (IPCA) - Duráveis ",
+        "format": "json",
+        "code": 10843,
+        "start_date": "31/01/1992",
+        "end_date": "01/01/2025",
+        "table_name": "duraveis"
+    },
+    {
+        "series_name": "Índice de Preços ao Consumidor-Amplo (IPCA) - Serviços ",
+        "format": "json",
+        "code": 10844,
+        "start_date": "31/01/1992",
+        "end_date": "01/01/2025",
+        "table_name": "servicos"
+    },
+    {
         "series_name": "Taxa de juros - Selic acumulada no mês",
         "format": "json",
         "code": 4390,
         "start_date": "01/08/1986",
         "end_date": "01/01/2025",
-        "table_name": "selic"
-    },
-    {
-        "series_name": "Taxa de câmbio - Livre - Dólar americano (compra)",
-        "format": "json",
-        "code": 10813,
-        "start_date": "01/01/1999",
-        "end_date": "01/01/2025",
-        "table_name": "cambio"
+        "table_name": "selic_acumulada_ao_mes"
     },
     {
         "series_name": "Agregado Monetário M2",
@@ -29,7 +277,7 @@
         "code": 1787,
         "start_date": "01/02/1980",
         "end_date": "01/01/2025",
-        "table_name": "m2"
+        "table_name": "agregado_monetario_m2"
     },
     {
         "series_name": "Índice de Confiança do Consumidor",
@@ -37,6 +285,6 @@
         "code": 4393,
         "start_date": "01/04/1999",
         "end_date": "01/01/2025",
-        "table_name": "icc"
+        "table_name": "indice_de_confianca_do_consumidor"
     }
 ]

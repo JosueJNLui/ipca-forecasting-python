@@ -7,5 +7,5 @@ locals {
 
 
   buckets      = ["assets", "landing", "bronze", "silver", "gold"]
-  data_sources = ["bcb", "sidra"]
+  data_sources = ["bcb.json"]
 }
