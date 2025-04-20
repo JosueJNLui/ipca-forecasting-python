@@ -31,8 +31,14 @@ clean-targets:         # directories to be removed by `dbt clean`
 # files using the `{{ config(...) }}` macro.
 models:
   ipca_forecasting:
-    +materialized: table
-    +post-hook: "{{ export_data_partition('year_partition', this.name) }}"
+    +materialized: view
+
+    staging:
+      +post-hook: "{{ export_data_partition('bronze', 'year_partition', this.name) }}"
+    
+    intermediate:
+      +post-hook: "{{ export_data_partition('silver', 'year_partition', this.name) }}"
+
     # Config indicated by + and applies to all files under models/example/
     example:
       +materialized: view
