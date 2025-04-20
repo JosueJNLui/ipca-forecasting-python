@@ -2,6 +2,8 @@ include .env
 export
 
 DBT_FOLDER = transform/ipca_forecasting
+BRONZE_MODELS = staging.*
+SILVER_MODELS = intermediate.*
 
 .PHONY: data-ingest format test
 
@@ -17,9 +19,17 @@ format:
 test:
 	pytest test
 
-data-transform:
+staging-transform:
 	poetry run dbt run \
 		--target dev \
+		--models $$BRONZE_MODELS \
+		--project-dir $$DBT_FOLDER \
+		--profiles-dir $$DBT_FOLDER
+	
+intermediate-transform:
+	poetry run dbt run \
+		--target dev \
+		--models $$SILVER_MODELS \
 		--project-dir $$DBT_FOLDER \
 		--profiles-dir $$DBT_FOLDER
 

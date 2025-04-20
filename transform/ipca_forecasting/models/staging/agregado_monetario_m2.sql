@@ -1,11 +1,9 @@
-{% macro  import_bcb_json(file) %}
-
 WITH aux_cte AS (
     SELECT
         STRPTIME(data, '%d/%m/%Y')::DATE as date
-        , valor::NUMERIC(7,2) as value
+        , valor::NUMERIC(15,2) as value
     FROM 
-        {{ external_json_path(file) }}
+        {{ external_json_path('agregado_monetario_m2') }}
 )
 SELECT
     aux_cte.*
@@ -13,5 +11,3 @@ SELECT
     , CAST(LPAD(CAST(MONTH(date) AS VARCHAR), 2, '0') || '-' || CAST(YEAR(date) AS VARCHAR) AS CHAR(7)) as month_year
 FROM
     aux_cte
-
-{% endmacro %}
