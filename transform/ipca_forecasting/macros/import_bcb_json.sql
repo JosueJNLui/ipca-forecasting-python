@@ -10,7 +10,8 @@ WITH aux_cte AS (
 SELECT
     aux_cte.*
     , YEAR(date)::SMALLINT as year_partition
-    , CAST(LPAD(CAST(MONTH(date) AS VARCHAR), 2, '0') || '-' || CAST(YEAR(date) AS VARCHAR) AS CHAR(7)) as month_year
+    , MONTH(date)::TINYINT as month
+    , CAST(CAST(YEAR(date) AS VARCHAR) || '-' || LPAD(CAST(MONTH(date) AS VARCHAR), 2, '0')AS CHAR(7)) as month_year
 FROM
     aux_cte
 
