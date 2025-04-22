@@ -2,6 +2,7 @@ SELECT
     ipca.date
     , ipca.month_year
     , ipca.year_partition
+    , ipca.month
     , ipca.value ipca_value
     , alimentacao_e_bebidas.value alimentacao_e_bebidas_value
     , habitacao.value habitacao_value
