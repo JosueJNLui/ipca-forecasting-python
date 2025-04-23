@@ -38,3 +38,10 @@ dbt-test:
 		--target dev \
 		--project-dir $$DBT_FOLDER \
 		--profiles-dir $$DBT_FOLDER
+
+forecast:
+	poetry run python -m forecast_model.main \
+		--aws_profile $$AWS_PROFILE \
+		--aws_account_id $$AWS_ACCOUNT_ID \
+		--aws_region $$AWS_REGION \
+		--env $$ENV
