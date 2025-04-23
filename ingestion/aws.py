@@ -9,4 +9,7 @@ def list_bucket_objects(
     s3 = client.resource("s3")
     bucket = s3.Bucket(bucket_name)
 
-    return [object_summary.key for object_summary in bucket.objects.filter(Prefix=f'{dir_name}/')]
+    return [
+        object_summary.key
+        for object_summary in bucket.objects.filter(Prefix=f"{dir_name}/")
+    ]

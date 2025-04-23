@@ -25,15 +25,24 @@ def main(params: ForecastJobParameters) -> None:
 
     columns, results = db.query_from_s3(f"{S3_SILVER_BUCKET}/{object_path}")
 
-    df = pl.DataFrame(results, schema=columns, orient='row')
+    df = pl.DataFrame(results, schema=columns, orient="row")
 
-    df = df.with_columns([
-        pl.col(col).cast(pl.Float64) for col, dtype in zip(df.columns, df.dtypes) if dtype == pl.Decimal
-    ])
+    df = df.with_columns(
+        [
+            pl.col(col).cast(pl.Float64)
+            for col, dtype in zip(df.columns, df.dtypes)
+            if dtype == pl.Decimal
+        ]
+    )
 
-    df = df.sort(pl.col('month_year'))
+    df = df.sort(pl.col("month_year"))
 
-    model = Model(df, .30, 'ipca_value', '/workspaces/ipca-forecasting-python/forecast_model/results.json')
+    model = Model(
+        df,
+        0.30,
+        "ipca_value",
+        "/workspaces/ipca-forecasting-python/forecast_model/results.json",
+    )
 
     models_dict = {
         "linear_regression": LinearRegression(),
@@ -42,9 +51,10 @@ def main(params: ForecastJobParameters) -> None:
     }
 
     for k, v in models_dict.items():
-        model.forecast_model(k, v, ['date', 'month_year'])
+        model.forecast_model(k, v, ["date", "month_year"])
 
     # print(df.schema)
+
 
 if __name__ == "__main__":
     fire.Fire(lambda **kwargs: main(ForecastJobParameters(**kwargs)))

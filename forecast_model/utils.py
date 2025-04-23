@@ -6,6 +6,7 @@ from sklearn.metrics import mean_absolute_error, root_mean_squared_error, r2_sco
 import os
 import matplotlib.pyplot as plt
 
+
 class Model:
     def __init__(
         self, df: pl.DataFrame, test_portion: float, target_col: str, results_path: str
@@ -35,11 +36,17 @@ class Model:
 
         return X_train, y_train, X_test, y_test
 
-    def forecast_model(self, model_name: str, selected_model, cols_to_remove: list[str]) -> None:
+    def forecast_model(
+        self, model_name: str, selected_model, cols_to_remove: list[str]
+    ) -> None:
         model = selected_model
-        model.fit(self.X_train.select(pl.exclude(cols_to_remove)), np.ravel(self.y_train))
+        model.fit(
+            self.X_train.select(pl.exclude(cols_to_remove)), np.ravel(self.y_train)
+        )
 
-        self.y_predictions = model.predict(self.X_test.select(pl.exclude(cols_to_remove)))
+        self.y_predictions = model.predict(
+            self.X_test.select(pl.exclude(cols_to_remove))
+        )
 
         self.save_results(model_name)
         self.plot(model_name)
@@ -59,19 +66,16 @@ class Model:
 
         with open(self.results_path, "w") as arquivo:
             json.dump(results, arquivo, indent=4)
-    
-    def plot(self, model_name: str):
 
-        df = self.df.select(['month_year', 'ipca_value'])
+    def plot(self, model_name: str):
+        df = self.df.select(["month_year", "ipca_value"])
 
         y_pred = pl.Series("y_pred", self.y_predictions)
-        forecast_df = self.X_test.with_columns(y_pred).select(['month_year', 'y_pred'])
+        forecast_df = self.X_test.with_columns(y_pred).select(["month_year", "y_pred"])
 
-        df = df.join(forecast_df, on=['month_year'], how='left')
+        df = df.join(forecast_df, on=["month_year"], how="left")
 
-        df = df.with_columns([
-            pl.col("month_year").str.strptime(pl.Date, "%Y-%m")
-        ])
+        df = df.with_columns([pl.col("month_year").str.strptime(pl.Date, "%Y-%m")])
         pdf = df.to_pandas()
 
         # # Plotting
@@ -90,6 +94,7 @@ class Model:
         # # Save to PNG
         # plt.savefig(f"{model_name}.png", dpi=300)
         # plt.close()
+
 
 def read_json(json_path: str) -> json:
     """
