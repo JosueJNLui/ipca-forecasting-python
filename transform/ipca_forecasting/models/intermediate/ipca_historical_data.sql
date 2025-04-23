@@ -46,3 +46,5 @@ FROM
     INNER JOIN {{ get_s3_path('bronze', 'selic_acumulada_ao_mes') }} selic_acumulada_ao_mes ON selic_acumulada_ao_mes.month_year = ipca.month_year
     INNER JOIN {{ get_s3_path('bronze', 'agregado_monetario_m2') }} agregado_monetario_m2 ON agregado_monetario_m2.month_year = ipca.month_year
     INNER JOIN {{ get_s3_path('bronze', 'indice_de_confianca_do_consumidor') }} indice_de_confianca_do_consumidor ON indice_de_confianca_do_consumidor.month_year = ipca.month_year
+WHERE 1=1
+    AND ipca.year_partition >= 2003
