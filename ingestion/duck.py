@@ -1,5 +1,6 @@
 import duckdb
-import pyarrow as pa 
+import pyarrow as pa
+
 
 class DB:
     def __init__(self, aws_profile: str, aws_region: str):

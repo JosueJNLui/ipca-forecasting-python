@@ -54,17 +54,18 @@ class API:
         Returns:
             json: The JSON response from the API.
         """
-        
-        while trial <=3:
 
+        while trial <= 3:
             try:
                 response = requests.get(url)
                 response.raise_for_status()
                 return response.json()
             except requests.exceptions.RequestException as e:
-                logger.error(f"Failed for the {trial} time to fetch the data. Waiting 02 seconds to try it again")
+                logger.error(
+                    f"Failed for the {trial} time to fetch the data. Waiting 02 seconds to try it again"
+                )
                 time.sleep(2)
-                self.get_request(url, trial+1)
+                self.get_request(url, trial + 1)
                 # raise
 
         logger.error(f"Failed to fetch the data from {url} endpoint: {e}")
