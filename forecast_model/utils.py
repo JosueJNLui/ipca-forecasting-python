@@ -78,22 +78,22 @@ class Model:
         df = df.with_columns([pl.col("month_year").str.strptime(pl.Date, "%Y-%m")])
         pdf = df.to_pandas()
 
-        # # Plotting
-        # plt.figure(figsize=(8, 5))
-        # plt.plot(pdf["month_year"], pdf["y_pred"], marker='o', label='y_pred')
-        # plt.plot(pdf["month_year"], pdf["ipca_value"], marker='o', label='ipca_value')
+        # Plotting
+        plt.figure(figsize=(8, 5))
+        plt.plot(pdf["month_year"], pdf["y_pred"], label='y_pred', color='black')
+        plt.plot(pdf["month_year"], pdf["ipca_value"], label='ipca_value', color='green')
 
-        # # Formatting
-        # print()
-        # plt.xlabel("Month-Year")
-        # plt.ylabel("Value")
-        # plt.title("Forecast vs IPCA")
-        # plt.legend()
-        # plt.grid(True)
+        # Formatting
+        print()
+        plt.xlabel("Month-Year")
+        plt.ylabel("Value")
+        plt.title("Forecast vs IPCA")
+        plt.legend()
+        plt.grid(True)
 
-        # # Save to PNG
-        # plt.savefig(f"{model_name}.png", dpi=300)
-        # plt.close()
+        # Save to PNG
+        plt.savefig(f"{model_name}.png", dpi=300)
+        plt.close()
 
 
 def read_json(json_path: str) -> json:
