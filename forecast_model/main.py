@@ -35,11 +35,27 @@ def main(params: ForecastJobParameters) -> None:
         ]
     )
 
+    cols_to_keep = ['ipca_value', 'month_year', 'month', 'year_partition', 'date']
+    lag_cols = df.columns
+
+    for col in cols_to_keep:
+        lag_cols.remove(col)
+
+    lag_value = 1
+    df = df.with_columns(
+        pl.col(col).shift(lag_value).alias(f'{col}_lag_{lag_value}')
+        for col in lag_cols
+    )
+
+    df = df.select(pl.exclude(lag_cols))
+
+    df = df.drop_nans()
+
     df = df.sort(pl.col("month_year"))
 
     model = Model(
         df,
-        0.30,
+        0.15,
         "ipca_value",
         "/workspaces/ipca-forecasting-python/forecast_model/results.json",
     )
@@ -52,8 +68,6 @@ def main(params: ForecastJobParameters) -> None:
 
     for k, v in models_dict.items():
         model.forecast_model(k, v, ["date", "month_year"])
-
-    # print(df.schema)
 
 
 if __name__ == "__main__":
